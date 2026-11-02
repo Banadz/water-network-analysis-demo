@@ -22,13 +22,13 @@ const LayerSection = ({
 
   return (
     <div className="space-y-3 mb-4 pb-4 border-b border-gray-300">
-      <h3 className="text-xs font-medium text-gray-700 uppercase tracking-wider">Couches</h3>
+      <h3 className="text-xs font-medium text-gray-700 uppercase tracking-wider">Layers</h3>
       
       {/* layer Search */}
       <div className="mb-3">
         <input 
           type="text" 
-          placeholder="Rechercher des couches..."
+          placeholder="Search layers..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -38,7 +38,7 @@ const LayerSection = ({
       {/* active layer */}
       {activeLayers.length > 0 && (
         <div className="mb-3">
-          <h4 className="text-xs font-medium text-gray-600 mb-1">Couches actives</h4>
+          <h4 className="text-xs font-medium text-gray-600 mb-1">Active layers</h4>
           <div className="space-y-1">
             {activeLayers.map(layer => (
               <div key={layer.id} className="bg-white p-1 rounded border border-gray-200 flex items-center justify-between text-xs">
@@ -66,7 +66,7 @@ const LayerSection = ({
       {/* Search results */}
       {searchQuery && (
         <div className="mb-3">
-          <h4 className="text-xs font-medium text-gray-600 mb-1">Résultats de recherche</h4>
+          <h4 className="text-xs font-medium text-gray-600 mb-1">Search results</h4>
           <div className="space-y-1">
             {filteredLayers.map(layer => (
               <div key={layer.id} className="bg-white p-1 rounded border border-gray-200 flex items-center justify-between text-xs">

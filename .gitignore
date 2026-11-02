@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and build output
+FRONT/wateranalysis-frontend/node_modules/
+FRONT/wateranalysis-frontend/build/
+
+# Backend build output and local Gradle state
+BACK/wateranalysis-backend/build/
+BACK/wateranalysis-backend/.gradle/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db

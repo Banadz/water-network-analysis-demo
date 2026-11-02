@@ -15,11 +15,11 @@ const GraphElementList = ({
   return (
     <div className="mb-3">
       <h4 className="text-xs font-medium text-gray-600 mb-1">
-        Éléments disponibles ({availableElements.length})
+        Available elements ({availableElements.length})
       </h4>
       {availableElements.length === 0 ? (
         <p className="text-xs text-gray-500 italic p-1">
-          Aucun élément disponible. Cliquez sur une zone de la carte pour en ajouter.
+          No elements available. Click a map area to add one.
         </p>
       ) : (
         <div className="space-y-1">

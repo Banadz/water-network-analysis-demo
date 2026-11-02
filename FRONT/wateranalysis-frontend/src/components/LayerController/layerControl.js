@@ -3,36 +3,36 @@ import { LAYER_TYPES } from '../../config/mapConfig';
 
 // Layer label
 const LAYER_LABELS = {
-  [LAYER_TYPES.REGION]: "Régions",
+  [LAYER_TYPES.REGION]: "Regions",
   [LAYER_TYPES.DISTRICT]: "Districts",
-  [LAYER_TYPES.COMMUNE]: "Communes",
-  [LAYER_TYPES.QUARTIER]: "Quartiers ADM",
-  [LAYER_TYPES.QUARTIER_ORCHA]: "Quartiers ORCHA",
-  [LAYER_TYPES.ZONE_COMMERCIALE]: "Zones commerciales",
-  [LAYER_TYPES.FOKOTANY]: "Fokontany",
-  [LAYER_TYPES.RESEAU]: "Réseaux",
-  [LAYER_TYPES.STATION_TRAITEMENT]: "Stations de traitement",
-  [LAYER_TYPES.RESERVOIR]: "Réservoirs",
-  [LAYER_TYPES.BORNE_FONTAINE]: "Bornes fontaines",
-  [LAYER_TYPES.NOEUD]: "Noeuds",
-  [LAYER_TYPES.VANNE]: "Vannes",
-  [LAYER_TYPES.POMPE]: "Pompes",
-  [LAYER_TYPES.CONDUITE_AMENEE]: "Conduites amenées",
+  [LAYER_TYPES.COMMUNE]: "Municipalities",
+  [LAYER_TYPES.QUARTIER]: "ADM Neighborhoods",
+  [LAYER_TYPES.QUARTIER_ORCHA]: "ORCHA Neighborhoods",
+  [LAYER_TYPES.ZONE_COMMERCIALE]: "Commercial areas",
+  [LAYER_TYPES.FOKOTANY]: "Fokontany (local areas)",
+  [LAYER_TYPES.RESEAU]: "Water networks",
+  [LAYER_TYPES.STATION_TRAITEMENT]: "Treatment plants",
+  [LAYER_TYPES.RESERVOIR]: "Reservoirs",
+  [LAYER_TYPES.BORNE_FONTAINE]: "Public water taps",
+  [LAYER_TYPES.NOEUD]: "Nodes",
+  [LAYER_TYPES.VANNE]: "Valves",
+  [LAYER_TYPES.POMPE]: "Pumps",
+  [LAYER_TYPES.CONDUITE_AMENEE]: "Supply pipes",
   [LAYER_TYPES.SOURCE]: "Sources",
-  [LAYER_TYPES.CAPTAGE]: "Captages",
-  [LAYER_TYPES.SECTEUR_DIST]: "Secteurs distribution",
-  [LAYER_TYPES.RESEAU_D3]: "Réseaux (D3 sens écoulement)",
-  [LAYER_TYPES.HEATMAP]: "Heatmap de consommation",
+  [LAYER_TYPES.CAPTAGE]: "Water intakes",
+  [LAYER_TYPES.SECTEUR_DIST]: "Distribution sectors",
+  [LAYER_TYPES.RESEAU_D3]: "Water networks (D3 flow direction)",
+  [LAYER_TYPES.HEATMAP]: "Consumption heatmap",
 };
 
 // layer groups
 const LAYER_GROUPS = {
-  "Réseau & Conduites": [
+  "Networks & Pipes": [
     LAYER_TYPES.RESEAU_D3,
     LAYER_TYPES.CONDUITE_AMENEE,
     LAYER_TYPES.RESEAU,
   ],
-  "Équipements": [
+  "Equipment": [
     LAYER_TYPES.STATION_TRAITEMENT,
     LAYER_TYPES.RESERVOIR,
     LAYER_TYPES.BORNE_FONTAINE,
@@ -40,7 +40,7 @@ const LAYER_GROUPS = {
     LAYER_TYPES.VANNE,
     LAYER_TYPES.POMPE,
   ],
-  "Territoires / Admin": [
+  "Territories / Administration": [
     LAYER_TYPES.REGION,
     LAYER_TYPES.DISTRICT,
     LAYER_TYPES.COMMUNE,
@@ -54,7 +54,7 @@ const LAYER_GROUPS = {
     LAYER_TYPES.SOURCE,
     LAYER_TYPES.CAPTAGE,
   ],
-  "Analytique": [
+  "Analytics": [
     LAYER_TYPES.HEATMAP,
   ]
 };
@@ -108,7 +108,7 @@ const LayerControl = ({ activeLayers = [], onToggle, filterQuery = '' }) => {
         return q === '' ? true : label.includes(q);
       });
 
-    if (ungrouped.length) result.push({ groupName: 'Autres', keys: ungrouped });
+    if (ungrouped.length) result.push({ groupName: 'Other', keys: ungrouped });
 
     return result;
   }, [q]);
@@ -126,7 +126,7 @@ const LayerControl = ({ activeLayers = [], onToggle, filterQuery = '' }) => {
                   onClick={(e) => { e.preventDefault(); toggleGroup(keys); }}
                   className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200"
                 >
-                  {allActive ? 'Tout désact.' : 'Tout activer'}
+                  {allActive ? 'Disable all' : 'Enable all'}
                 </button>
                 <span className="text-xs text-gray-400">{keys.length}</span>
               </div>
@@ -150,7 +150,7 @@ const LayerControl = ({ activeLayers = [], onToggle, filterQuery = '' }) => {
       })}
 
       {groupsToRender.length === 0 && (
-        <div className="text-sm text-gray-400 italic p-3">Aucune couche trouvée</div>
+        <div className="text-sm text-gray-400 italic p-3">No layers found</div>
       )}
     </div>
   );

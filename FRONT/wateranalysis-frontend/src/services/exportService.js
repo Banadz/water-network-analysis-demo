@@ -6,10 +6,10 @@ import { featureCollection } from '@turf/helpers';
  * @param {HTMLElement} mapContainer - Conteneur de la carte
  * @param {string} filename - Nom du fichier (sans extension)
  */
-export const exportMapToPNG = async (mapContainer, filename = 'carte') => {
+export const exportMapToPNG = async (mapContainer, filename = 'map') => {
   try {
     if (!mapContainer) {
-      throw new Error('Conteneur de carte non disponible');
+      throw new Error('Map container is unavailable');
     }
 
     const canvas = await html2canvas(mapContainer, {
@@ -24,7 +24,7 @@ export const exportMapToPNG = async (mapContainer, filename = 'carte') => {
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) {
-          reject(new Error('Impossible de créer le blob PNG'));
+          reject(new Error('Could not create the PNG image'));
           return;
         }
         const url = URL.createObjectURL(blob);
@@ -39,7 +39,7 @@ export const exportMapToPNG = async (mapContainer, filename = 'carte') => {
       }, 'image/png');
     });
   } catch (error) {
-    console.error('Erreur lors de l\'export PNG:', error);
+    console.error('PNG export error:', error);
     throw error;
   }
 };
@@ -50,7 +50,7 @@ export const exportMapToPNG = async (mapContainer, filename = 'carte') => {
  * @param {Object} layers - Toutes les données des couches
  * @param {string} filename - Nom du fichier (sans extension)
  */
-export const exportLayersToGeoJSON = (activeLayers, layers, filename = 'couches') => {
+export const exportLayersToGeoJSON = (activeLayers, layers, filename = 'layers') => {
   try {
     const features = [];
 
@@ -72,7 +72,7 @@ export const exportLayersToGeoJSON = (activeLayers, layers, filename = 'couches'
     });
 
     if (features.length === 0) {
-      throw new Error('Aucune couche vectorielle active à exporter');
+      throw new Error('No active vector layers to export');
     }
 
     const geoJsonData = featureCollection(features);
@@ -89,7 +89,7 @@ export const exportLayersToGeoJSON = (activeLayers, layers, filename = 'couches'
     URL.revokeObjectURL(url);
 
   } catch (error) {
-    console.error('Erreur lors de l\'export GeoJSON:', error);
+    console.error('GeoJSON export error:', error);
     throw error;
   }
 };
@@ -113,15 +113,15 @@ export const exportLayersToGeoJSON = (activeLayers, layers, filename = 'couches'
  * @param {string}      filename     - Nom du fichier sans extension
  * @returns {Promise<void>}
  */
-export const exportMapAsScreenshot = async (mapContainer, filename = 'carte') => {
+export const exportMapAsScreenshot = async (mapContainer, filename = 'map') => {
   if (!mapContainer) {
-    throw new Error('Conteneur de carte introuvable.');
+    throw new Error('Map container not found.');
   }
 
   if (!navigator.mediaDevices?.getDisplayMedia) {
     throw new Error(
-      'La capture d\'écran native n\'est pas supportée par ce navigateur. ' +
-      'Utilisez Chrome 94+ ou Edge 94+.'
+      'Native screenshots are not supported by this browser. ' +
+      'Use Chrome 94+ or Edge 94+.'
     );
   }
 
@@ -210,7 +210,7 @@ export const exportMapAsScreenshot = async (mapContainer, filename = 'carte') =>
 const _downloadCanvas = (canvas, filename) =>
   new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
-      if (!blob) { reject(new Error('Impossible de générer l\'image.')); return; }
+      if (!blob) { reject(new Error('Could not generate the image.')); return; }
       const url  = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href     = url;
@@ -240,14 +240,14 @@ export const exportMap = async (format, mapContainer, activeLayers, layers, file
       return await exportMapToPNG(mapContainer, filename);
 
     case 'screenshot':
-      if (!mapContainer) throw new Error('Conteneur de carte non disponible pour la capture d\'écran');
+      if (!mapContainer) throw new Error('Map container is unavailable for screenshot capture');
       return await exportMapAsScreenshot(mapContainer, filename);
 
     case 'geojson':
-      if (!activeLayers || !layers) throw new Error('Données des couches non disponibles pour l\'export GeoJSON');
+      if (!activeLayers || !layers) throw new Error('Layer data is unavailable for GeoJSON export');
       return exportLayersToGeoJSON(activeLayers, layers, filename);
 
     default:
-      throw new Error(`Format d'export non supporté : ${format}`);
+      throw new Error(`Unsupported export format: ${format}`);
   }
 };

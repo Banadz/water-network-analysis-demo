@@ -57,7 +57,7 @@ export const useHeatmapData = () => {
       return data;
     } catch (err) {
       if (isMountedRef.current) {
-        setError(err.message || 'Erreur lors du chargement des données heatmap');
+        setError(err.message || 'Failed to load heatmap data');
       }
       return null;
     } finally {

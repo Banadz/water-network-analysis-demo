@@ -31,7 +31,7 @@ public class ConsumptionService {
 
             // Validate dates
             if (startDate.isAfter(endDate)) {
-                throw new IllegalArgumentException("La date de début ne peut pas être après la date de fin");
+                throw new IllegalArgumentException("Start date cannot be after end date");
             }
             
             List<ZoneConsumptionDTO> results = consumptionRepository.getAllConsumptionByZone(startDate, endDate);

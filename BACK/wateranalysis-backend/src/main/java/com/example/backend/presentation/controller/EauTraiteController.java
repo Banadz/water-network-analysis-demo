@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@Tag(name = "Eau traité", description = "Récupération d'eau traité par zone et date")
+@Tag(name = "Treated water", description = "Treated water data by zone and date")
 @RequestMapping("/api/eau-traite")
-@CrossOrigin(origins = "https://orehm.univ-fianarantsoa.mg/") // Adaptez selon votre frontend
+    @CrossOrigin(origins = "https://orehm.univ-fianarantsoa.mg/")
 public class EauTraiteController {
     private static final Logger logger = LoggerFactory.getLogger(EauTraiteController.class);
 
@@ -29,8 +29,8 @@ public class EauTraiteController {
     }
 
     @PostMapping("/by-zone")
-    @Operation(summary = "Récupérer les quantité d'eau traité",
-            description = "Retourne la quantité d'eau traité groupée par zone et limité par des dates")
+        @Operation(summary = "Get treated water quantities",
+            description = "Returns treated water quantities grouped by zone and date range")
     public ResponseEntity<List<EauTraiteDTO>> getEauTraiteByZone(@RequestBody List<QueryRequestDTO> queryRequest) {
         try {
             logger.info("Received {} query requests", queryRequest.size());

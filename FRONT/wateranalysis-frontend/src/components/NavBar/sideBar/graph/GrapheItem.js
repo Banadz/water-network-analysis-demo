@@ -130,7 +130,7 @@ const GraphItem = ({
                   ? 'bg-purple-100 hover:bg-purple-200' 
                   : 'hover:bg-gray-100'
               }`}
-              title={predictionEnabled ? "Prédiction activée" : "Prédiction désactivée"}
+              title={predictionEnabled ? "Forecasting enabled" : "Forecasting disabled"}
             >
               <TrendingUp className={`w-3 h-3 ${
                 predictionEnabled ? 'text-purple-600' : 'text-gray-400'
@@ -164,7 +164,7 @@ const GraphItem = ({
         {predictionEnabled && (
           <div className="mb-2 flex items-center text-[10px] text-purple-600 bg-purple-50 p-1 rounded">
             <TrendingUp className="w-3 h-3 mr-1" />
-            <span>Prédiction activée</span>
+            <span>Forecasting enabled</span>
           </div>  
         )}
 
@@ -172,7 +172,7 @@ const GraphItem = ({
         {hasDates && (
           <div className="mb-2 flex items-center text-[10px] text-gray-500 bg-blue-50 p-1 rounded">
             <Calendar className="w-3 h-3 mr-1" />
-            <span>Période: {graph.dateDebut} au {graph.dateFin}</span>
+            <span>Period: {graph.dateDebut} to {graph.dateFin}</span>
           </div>  
         )}
 
@@ -242,7 +242,7 @@ const GraphItem = ({
 
         {graph.elements.length === 0 && (
           <div className="text-center py-2 text-gray-500 border border-dashed border-gray-300 rounded text-xs">
-            Glissez des éléments ici
+            Drag elements here
           </div>
         )}
       </div>
@@ -264,7 +264,7 @@ const GraphItem = ({
             className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-sm"
           >
             <TrendingUp className={`w-4 h-4 ${predictionEnabled ? 'text-purple-600' : 'text-gray-600'}`} />
-            <span>{predictionEnabled ? 'Désactiver prédiction' : 'Activer prédiction'}</span>
+            <span>{predictionEnabled ? 'Disable forecasting' : 'Enable forecasting'}</span>
           </button>
           
           <div className="border-t border-gray-200 my-1"></div>
@@ -277,14 +277,14 @@ const GraphItem = ({
                 className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-sm"
               >
                 <Calendar className="w-4 h-4 text-blue-600" />
-                <span>Modifier date</span>
+                <span>Edit dates</span>
               </button>
               <button
                 onClick={() => handleMenuAction('clearDate')}
                 className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-sm"
               >
                 <CalendarX className="w-4 h-4 text-orange-600" />
-                <span>Vider date</span>
+                <span>Clear dates</span>
               </button>
             </>
           ) : (
@@ -293,7 +293,7 @@ const GraphItem = ({
               className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-sm"
             >
               <Calendar className="w-4 h-4 text-green-600" />
-              <span>Insérer date</span>
+              <span>Set dates</span>
             </button>
           )}
           
@@ -304,7 +304,7 @@ const GraphItem = ({
             className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-sm"
           >
             <Edit className="w-4 h-4 text-gray-600" />
-            <span>Éditer</span>
+            <span>Edit</span>
           </button>
           <button
             onClick={() => handleMenuAction('toggle')}
@@ -313,12 +313,12 @@ const GraphItem = ({
             {graph.status === "afficher" ? (
               <>
                 <EyeOff className="w-4 h-4 text-gray-600" />
-                <span>Masquer</span>
+                <span>Hide</span>
               </>
             ) : (
               <>
                 <Eye className="w-4 h-4 text-green-600" />
-                <span>Afficher</span>
+                <span>Show</span>
               </>
             )}
           </button>
@@ -328,7 +328,7 @@ const GraphItem = ({
             className="w-full px-4 py-2 text-left hover:bg-red-50 flex items-center space-x-2 text-sm text-red-600"
           >
             <Trash2 className="w-4 h-4" />
-            <span>Supprimer</span>
+            <span>Delete</span>
           </button>
         </div>
       )}
@@ -340,7 +340,7 @@ const GraphItem = ({
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold flex items-center space-x-2">
                 <Calendar className="w-5 h-5 text-green-600" />
-                <span>{hasDates ? 'Modifier la période' : 'Définir la période'}</span>
+                <span>{hasDates ? 'Edit date range' : 'Set date range'}</span>
               </h3>
               <button
                 onClick={() => setShowDateModal(false)}
@@ -353,7 +353,7 @@ const GraphItem = ({
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Date de début
+                  Start date
                 </label>
                 <input
                   type="date"
@@ -365,7 +365,7 @@ const GraphItem = ({
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Date de fin
+                  End date
                 </label>
                 <input
                   type="date"
@@ -381,13 +381,13 @@ const GraphItem = ({
                 onClick={() => setShowDateModal(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 onClick={handleSaveDates}
                 className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
-                Enregistrer
+                Save
               </button>
             </div>
           </div>

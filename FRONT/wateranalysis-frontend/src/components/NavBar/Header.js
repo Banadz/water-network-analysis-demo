@@ -13,39 +13,39 @@ const Header = ({ activeDropdown, setActiveDropdown, activeView, setActiveView }
   // Nested menus avec IDs de vue
   const menuItems = [
     {
-      name: "Accueil",
+      name: "Home",
       icon: Home,
       subItems: [
-        { label: "Tableau de bord", viewId: "dashboard" },
-        { label: "Vue d'ensemble", viewId: "overview" },
-        { label: "Actualités", viewId: "news" }
+        { label: "Dashboard", viewId: "dashboard" },
+        { label: "Overview", viewId: "overview" },
+        { label: "News", viewId: "news" }
       ]
     },
     {
-      name: "Couches",
+      name: "Layers",
       icon: Layers,
       subItems: [
-        { label: "Gestion des couches", viewId: "map" }, // Vue carte par défaut
+        { label: "Layer management", viewId: "map" },
         { label: "Import/Export", viewId: "import-export" },
-        { label: "Paramètres", viewId: "settings" }
+        { label: "Settings", viewId: "settings" }
       ]
     },
     {
-      name: "Analytiques",
+      name: "Analytics",
       icon: BarChart3,
       subItems: [
-        { label: "Rapports", viewId: "reports" },
-        { label: "Tendances", viewId: "trends" },
-        { label: "Comparaisons", viewId: "comparisons" }
+        { label: "Reports", viewId: "reports" },
+        { label: "Trends", viewId: "trends" },
+        { label: "Comparisons", viewId: "comparisons" }
       ]
     },
     {
-      name: "Statistiques",
+      name: "Statistics",
       icon: PieChart,
       subItems: [
-        { label: "Temps réel", viewId: "realtime" },
-        { label: "Historique", viewId: "history" },
-        { label: "Prévisions", viewId: "predictions" }
+        { label: "Real time", viewId: "realtime" },
+        { label: "History", viewId: "history" },
+        { label: "Forecasts", viewId: "predictions" }
       ]
     }
   ];

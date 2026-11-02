@@ -8,8 +8,8 @@ COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
 
-# Donner les permissions d'exécution au wrapper Gradle
-RUN chmod +x gradlew
+# Normaliser les fins de ligne Windows puis rendre le wrapper exécutable
+RUN sed -i 's/\r$//' gradlew && chmod +x gradlew
 
 # Télécharger les dépendances (sans builder le projet pour optimiser le cache Docker)
 RUN ./gradlew dependencies --no-daemon

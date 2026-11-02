@@ -131,7 +131,7 @@ const ExportControl = ({ mapContainerRef, activeLayers, layers }) => {
         layers,
         timestampedFilename("Map_Export_WNA")
       );
-      showToast("Exportation PNG réussie !", "success");
+      showToast("PNG exported successfully!", "success");
     } catch (err) {
       console.error("[ExportControl] PNG export error:", err);
       showToast(`Error: ${err.message}`, "error");
@@ -144,7 +144,7 @@ const ExportControl = ({ mapContainerRef, activeLayers, layers }) => {
     setIsOpen(false);
 
     if (!hasVisibleVectorLayer(activeLayers, layers)) {
-      showToast("Aucune couche active sélectionnée.", "error");
+      showToast("No active layer selected.", "error");
       return;
     }
 
@@ -156,7 +156,7 @@ const ExportControl = ({ mapContainerRef, activeLayers, layers }) => {
         layers,
         timestampedFilename("Layer_Export_WNA")
       );
-      showToast("Exportation GeoJSON réussie !", "success");
+      showToast("GeoJSON exported successfully!", "success");
     } catch (err) {
       console.error("[ExportControl] GeoJSON export error:", err);
       showToast(err.message, "error");

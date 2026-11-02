@@ -57,7 +57,7 @@ const LeftSidebar = ({
     }`}>
       <div className="p-3 h-full overflow-y-auto">
         <div className="flex items-center justify-between mb-3">
-          {isOpen && <h2 className="text-md font-semibold text-gray-800">Gestion d'affichage</h2>}
+          {isOpen && <h2 className="text-md font-semibold text-gray-800">Display settings</h2>}
           <button 
             onClick={() => setIsOpen(!isOpen)}
             className="p-1 rounded hover:bg-gray-200 transition-colors"
@@ -128,13 +128,13 @@ const LeftSidebar = ({
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span className="font-medium font-semibold">Chargement...</span>
+                        <span className="font-medium font-semibold">Loading...</span>
                       </>
                     ) : (
                       <>
                         <Send className="w-3 h-3" />
                         <span className="font-medium font-semibold">
-                          Envoyer la requête
+                          Send request
                         </span>
                       </>
                     )}
@@ -150,7 +150,7 @@ const LeftSidebar = ({
                     <div className="flex items-center justify-center space-x-2 text-white">
                       <Trash2 className="w-3 h-3" />
                       <span className="font-medium">
-                        Effacer les données ({loadedGraphsCount})
+                        Clear data ({loadedGraphsCount})
                       </span>
                     </div>
                   </button>
@@ -159,7 +159,7 @@ const LeftSidebar = ({
                 {/* log errors */}
                 {error && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-xs">
-                    <p className="font-semibold">Erreur:</p>
+                    <p className="font-semibold">Error:</p>
                     <p>{error}</p>
                   </div>
                 )}
@@ -167,9 +167,9 @@ const LeftSidebar = ({
                 {/* success message */}
                 {!loading && !error && loadedGraphsCount > 0 && (
                   <div className="bg-green-50 border border-green-200 text-green-700 px-3 py-2 rounded text-xs">
-                    <p className="font-semibold">✓ Données chargées</p>
+                    <p className="font-semibold">✓ Data loaded</p>
                     <p className="text-[10px] mt-1">
-                      {loadedGraphsCount} graphe(s) avec données
+                      {loadedGraphsCount} chart(s) with data
                     </p>
                   </div>
                 )}

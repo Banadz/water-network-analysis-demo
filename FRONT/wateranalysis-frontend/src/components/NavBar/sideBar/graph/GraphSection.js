@@ -28,7 +28,7 @@ const GraphSection = ({
 }) => {
   return (
     <div className="space-y-3">
-      <h3 className="text-xs font-medium text-gray-700 uppercase tracking-wider">Graphiques</h3>
+      <h3 className="text-xs font-medium text-gray-700 uppercase tracking-wider">Charts</h3>
       
       {/* Avalaible elements */}
       <GraphElementList
@@ -71,7 +71,7 @@ const GraphSection = ({
       >
         <div className="flex items-center justify-center space-x-1 text-gray-600 hover:text-blue-600">
           <Plus className="w-3 h-3" />
-          <span className="font-medium">Nouveau graphique</span>
+          <span className="font-medium">New chart</span>
         </div>
       </button>
     </div>

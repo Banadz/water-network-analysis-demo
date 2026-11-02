@@ -62,13 +62,13 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
       for (const graph of visibleGraphs) {
         // Check if the graph has dates
         if (!graph.dateDebut || !graph.dateFin) {
-          console.warn(`Le graphe "${graph.name}" n'a pas de dates définies, il sera ignoré`);
+          console.warn(`Chart "${graph.name}" has no dates and will be skipped`);
           continue;
         }
 
         // Check if the graph has elements
         if (!graph.elements || graph.elements.length === 0) {
-          console.warn(`Le graphe "${graph.name}" n'a pas d'éléments, il sera ignoré`);
+          console.warn(`Chart "${graph.name}" has no elements and will be skipped`);
           continue;
         }
 
@@ -99,7 +99,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
       }
 
       if (allRequests.length === 0) {
-        setError("Aucun graphe visible avec des dates définies et des éléments actifs");
+        setError("No visible chart has a date range and active elements");
         setLoading(false);
         return;
       }
@@ -137,7 +137,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
             type: request.type,
             success: false,
             zonesCount: request.payload.length,
-            error: result.reason?.message || 'Erreur inconnue'
+            error: result.reason?.message || 'Unknown error'
           };
         }
       });
@@ -178,17 +178,17 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
 
       const finalData = Object.values(groupedData);
       setResponseData(finalData);
-      console.log('Données reçues et regroupées:', finalData);
+      console.log('Received and grouped data:', finalData);
 
       // check for errors
       const hasErrors = processedData.some(item => !item.success);
       if (hasErrors) {
-        setError("Certaines requêtes ont échoué. Consultez la console pour plus de détails.");
+        setError("Some requests failed. Check the console for details.");
       }
 
     } catch (err) {
-      console.error('Erreur lors de l\'envoi des requêtes:', err);
-      setError(err.message || 'Une erreur est survenue lors de l\'envoi des requêtes');
+      console.error('Error sending requests:', err);
+      setError(err.message || 'An error occurred while sending requests');
     } finally {
       setLoading(false);
     }
@@ -210,12 +210,12 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="font-medium font-semibold">Chargement...</span>
+                <span className="font-medium font-semibold">Loading...</span>
               </>
             ) : (
               <>
                 <Send className="w-3 h-3" />
-                <span className="font-medium font-semibold">Envoyer la requête</span>
+                <span className="font-medium font-semibold">Send request</span>
               </>
             )}
           </div>
@@ -225,7 +225,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
       {/* show errors */}
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-xs">
-          <p className="font-semibold">Erreur:</p>
+          <p className="font-semibold">Error:</p>
           <p>{error}</p>
         </div>
       )}
@@ -233,7 +233,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
       {/* display results */}
       {responseData && (
         <div className="bg-green-50 border border-green-200 text-green-700 px-3 py-2 rounded text-xs">
-          <p className="font-semibold">Requête envoyée avec succès!</p>
+          <p className="font-semibold">Request sent successfully!</p>
           <div className="text-[10px] mt-1 space-y-1">
             {responseData.map(graph => (
               <div key={graph.graphId} className="bg-white bg-opacity-50 p-1 rounded">
@@ -246,7 +246,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
                 {graph.production && graph.consumption && <span>, </span>}
                 {graph.consumption && (
                   <span className="ml-1">
-                    Consommation ({graph.consumption.zonesCount} zone{graph.consumption.zonesCount > 1 ? 's' : ''})
+                    Consumption ({graph.consumption.zonesCount} zone{graph.consumption.zonesCount > 1 ? 's' : ''})
                   </span>
                 )}
               </div>
@@ -259,7 +259,7 @@ const GraphRequestSection = ({ graphs, graphElements }) => {
       {responseData && (
         <details className="text-xs bg-gray-50 p-2 rounded border border-gray-200">
           <summary className="cursor-pointer font-semibold text-gray-700">
-            Voir les données reçues (Debug)
+            View received data (debug)
           </summary>
           <pre className="mt-2 text-[10px] overflow-auto max-h-60 bg-white p-2 rounded">
             {JSON.stringify(responseData, null, 2)}

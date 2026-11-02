@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 
 @RestController
-@Tag(name = "Eau distribué", description = "API pour la gestion de l'eau distribuée par zone et date")
+@Tag(name = "Distributed water", description = "API for distributed water data by zone and date")
 @RequestMapping("/api/eau-distribue")
 @CrossOrigin(origins = "https://orehm.univ-fianarantsoa.mg/")
 public class EauDistribueController {
@@ -41,13 +41,13 @@ public class EauDistribueController {
 
     @PostMapping("/by-zone")
     @Operation(
-        summary = "Récupérer les quantités d'eau distribuée",
-        description = "Retourne la quantité d'eau distribuée groupée par zone et limitée par des dates"
+        summary = "Get distributed water quantities",
+        description = "Returns distributed water quantities grouped by zone and date range"
     )
-    @ApiResponse(responseCode = "200", description = "Succès", 
+    @ApiResponse(responseCode = "200", description = "Success",
                  content = @Content(schema = @Schema(implementation = EauDistribueDTO.class)))
     public ResponseEntity<List<EauDistribueDTO>> getEauDistribueByZone(
-        @Parameter(description = "Liste des requêtes de filtrage par zone", 
+        @Parameter(description = "List of zone filter requests",
                   required = true,
                   content = @Content(schema = @Schema(implementation = QueryRequestDTO.class)))
         @RequestBody List<QueryRequestDTO> queryRequest) {
@@ -72,10 +72,10 @@ public class EauDistribueController {
     }
     @GetMapping("/heatmap/by-zone")
     @Operation(
-        summary = "Récupération de données pour heatmap",
-        description = "Rétourne les données d'affichge de heatmap de consommation par zone pour un periode"
+        summary = "Get heatmap data",
+        description = "Returns consumption heatmap data by zone for a date range"
     )
-    @ApiResponse(responseCode = "200", description = "Succès",
+    @ApiResponse(responseCode = "200", description = "Success",
                 content = @Content(schema = @Schema(implementation = ZoneConsumptionDTO.class))
     )
     public ResponseEntity<List<ZoneConsumptionDTO>> getConsumptionByZone(

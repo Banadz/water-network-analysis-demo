@@ -11,7 +11,7 @@ const Footer = () => {
       /> */}
 
       <p className="text-xs text-gray-400 text-center max-w-ful leading-relaxed mx-auto">
-        Water Network Analysis, Plateforme d'analyse et de visualisation des données spatiales en adduction d'eau potable — OREHM, Haute Matsiatra.
+        Water Network Analysis, a platform for mapping and analysing drinking-water infrastructure and spatial data — OREHM, Haute Matsiatra.
         <br />
         Université de Fianarantsoa &nbsp;|&nbsp; Madatlas &nbsp;|&nbsp; © {new Date().getFullYear()}
       </p>

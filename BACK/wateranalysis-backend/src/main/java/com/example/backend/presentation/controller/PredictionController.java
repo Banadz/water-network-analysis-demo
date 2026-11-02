@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 @RestController
-@Tag(name = "Prédictions", description = "API pour les prédictions de consommation et production d'eau")
+@Tag(name = "Predictions", description = "API for water consumption and production forecasts")
 @RequestMapping("/api")
 @CrossOrigin(origins = "https://orehm.univ-fianarantsoa.mg/")
 public class PredictionController {
@@ -27,7 +27,7 @@ public class PredictionController {
     }
     
     @PostMapping("/eau-distribue/by-zone/prediction")
-    @Operation(summary = "Prédictions de consommation d'eau")
+    @Operation(summary = "Forecast water consumption")
     public ResponseEntity<?> getConsumptionPredictions(@RequestBody List<QueryRequestDTO> queryRequests) {
 
         try {
@@ -47,19 +47,19 @@ public class PredictionController {
             return ResponseEntity.ok(health);
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
-                .body(createErrorResponse("Health check échoué: " + e.getMessage()));
+                .body(createErrorResponse("Health check failed: " + e.getMessage()));
         }
     }
 
     private void validatePredictionRequests(List<QueryRequestDTO> requests, String type) {
         if (requests == null || requests.isEmpty())
-            throw new IllegalArgumentException("La liste des requêtes est vide");
+            throw new IllegalArgumentException("The request list is empty");
 
         for (var req : requests) {
             if (req.getZoneId() == null)
-                throw new IllegalArgumentException("Zone ID manquant");
+                throw new IllegalArgumentException("Zone ID is missing");
             if (req.getCoordinates() == null)
-                throw new IllegalArgumentException("Coordonnées manquantes");
+                throw new IllegalArgumentException("Coordinates are missing");
         }
     }
 

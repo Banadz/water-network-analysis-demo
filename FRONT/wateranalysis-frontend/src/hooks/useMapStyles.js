@@ -56,13 +56,13 @@ export const useMapStyles = () => {
     [LAYER_TYPES.STATION_TRAITEMENT]: {
       color: 'black',
       weight: 1,
-      fillColor: getColor('Station de traitement'),
+      fillColor: getColor('Treatment plant'),
       fillOpacity: 0.8
     },
     [LAYER_TYPES.RESERVOIR]: {
       color: 'black',
       weight: 1,
-      fillColor: getColor('Réservoir'),
+      fillColor: getColor('Reservoir'),
       fillOpacity: 0.8
     },
     [LAYER_TYPES.BORNE_FONTAINE]: {
@@ -105,34 +105,34 @@ export const useMapStyles = () => {
 
   const onEachFeature = useCallback((layerType) => {
     const popupTemplates = {
-      [LAYER_TYPES.REGION]: (feature) => `Région : ${feature.properties.NAME_1}`,
+      [LAYER_TYPES.REGION]: (feature) => `Region: ${feature.properties.NAME_1}`,
       [LAYER_TYPES.DISTRICT]: (feature) => `District : ${feature.properties.NAME_2}`,
-      [LAYER_TYPES.COMMUNE]: (feature) => `Commune : ${feature.properties.NAME_3}`,
-      [LAYER_TYPES.QUARTIER]: (feature) => `Quartier : ${feature.properties.NAME_4}`,
-      [LAYER_TYPES.QUARTIER_ORCHA]: (feature) => `Fokotany : ${feature.properties.ADM4_EN}`,
-      [LAYER_TYPES.ZONE_COMMERCIALE]: (feature) => `Zone commerciale : ${feature.properties.id}`,
-      [LAYER_TYPES.FOKOTANY]: (feature) => `Fokotany : ${feature.properties.LIB_FKT}`,
+      [LAYER_TYPES.COMMUNE]: (feature) => `Municipality: ${feature.properties.NAME_3}`,
+      [LAYER_TYPES.QUARTIER]: (feature) => `Neighborhood: ${feature.properties.NAME_4}`,
+      [LAYER_TYPES.QUARTIER_ORCHA]: (feature) => `ORCHA neighborhood: ${feature.properties.ADM4_EN}`,
+      [LAYER_TYPES.ZONE_COMMERCIALE]: (feature) => `Commercial area: ${feature.properties.id}`,
+      [LAYER_TYPES.FOKOTANY]: (feature) => `Fokontany: ${feature.properties.LIB_FKT}`,
       [LAYER_TYPES.RESEAU]: (feature) => {
         if (feature.properties && feature.properties.ID) {
-          return `Réseau: ${feature.properties.ID}`;
+          return `Water network: ${feature.properties.ID}`;
         }
         return null;
       },
-      [LAYER_TYPES.STATION_TRAITEMENT]: (feature) => `Station de traitement : ${feature.properties.ID}`,
-      [LAYER_TYPES.RESERVOIR]: (feature) => `Réservoir : ${feature.properties.ID}`,
-      [LAYER_TYPES.BORNE_FONTAINE]: (feature) => `Borne fontaine : ${feature.properties.Text}`,
-      [LAYER_TYPES.NOEUD]: (feature) => `Noeud : ${feature.properties.ID_Noeud}`,
-      [LAYER_TYPES.VANNE]: (feature) => `Vanne : ${feature.properties.ID}`,
-      [LAYER_TYPES.POMPE]: (feature) => `Pompe : ${feature.properties.ID}`,
+      [LAYER_TYPES.STATION_TRAITEMENT]: (feature) => `Treatment plant: ${feature.properties.ID}`,
+      [LAYER_TYPES.RESERVOIR]: (feature) => `Reservoir: ${feature.properties.ID}`,
+      [LAYER_TYPES.BORNE_FONTAINE]: (feature) => `Public water tap: ${feature.properties.Text}`,
+      [LAYER_TYPES.NOEUD]: (feature) => `Node: ${feature.properties.ID_Noeud}`,
+      [LAYER_TYPES.VANNE]: (feature) => `Valve: ${feature.properties.ID}`,
+      [LAYER_TYPES.POMPE]: (feature) => `Pump: ${feature.properties.ID}`,
       [LAYER_TYPES.CONDUITE_AMENEE]: (feature) => {
         if (feature.properties && feature.properties.ID_1) {
-          return `Conduite amenée: ${feature.properties.ID_1}`;
+          return `Supply pipe: ${feature.properties.ID_1}`;
         }
         return null;
       },
       [LAYER_TYPES.SOURCE]: (feature) => `Source : ${feature.properties.ID}`,
-      [LAYER_TYPES.CAPTAGE]: (feature) => `Captage : ${feature.properties.ID}`,
-      [LAYER_TYPES.SECTEUR_DIST]: (feature) => `Secteur de distribution N°: ${feature.properties.id}`,
+      [LAYER_TYPES.CAPTAGE]: (feature) => `Water intake: ${feature.properties.ID}`,
+      [LAYER_TYPES.SECTEUR_DIST]: (feature) => `Distribution sector No.: ${feature.properties.id}`,
     };
 
     return (feature, layer) => {

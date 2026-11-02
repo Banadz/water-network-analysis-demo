@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://api-orehm.univ-fianarantsoa.mg/api",
+  baseURL: process.env.REACT_APP_API_URL || "https://api-orehm.univ-fianarantsoa.mg/api",
   headers: {
     "Content-Type": "application/json",
   },

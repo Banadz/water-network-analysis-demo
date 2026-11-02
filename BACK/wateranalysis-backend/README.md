@@ -1,97 +1,66 @@
-# MadaAtlas — Backend de Gestion et d'Analyse des Réseaux d'Eau
+# MadaAtlas Backend
 
-Résumé
--------
-Ce projet est le backend d'une plateforme d'analyse et de cartographie des réseaux d'eau (captage, traitement, distribution, consommation). Il est développé en Java avec Spring Boot et expose des API REST pour consulter et filtrer des données spatiales et temporelles. La persistance utilise PostgreSQL avec l'extension PostGIS pour stocker et interroger des géométries.
+The backend provides REST APIs for mapping and analysing water infrastructure data, including water sources, treatment, distribution, and consumption. It is built with Java and Spring Boot and uses PostgreSQL/PostGIS for persistence and spatial queries.
 
-Tech stack
-----------
-- Java 17, Spring Boot
-- Build : Gradle
-- Base de données : PostgreSQL + PostGIS
-- Persistance : Spring Data JPA / Hibernate (+ hibernate-spatial)
-- Geo : LocationTech JTS
-- Docs API : springdoc / Swagger UI
+## Technology Stack
 
-Fichiers importants
---------------------
-- `build.gradle` — configuration Gradle et dépendances
-- `src/main/java/com/example/backend/` — code source (controllers, services, repository, dto, config)
-- `src/main/resources/application.properties` — configuration (DB, ports, profils)
+- Java 17 and Spring Boot 3
+- Gradle Wrapper
+- PostgreSQL with PostGIS
+- Spring Data JPA, Hibernate Spatial, and LocationTech JTS
+- springdoc OpenAPI and Swagger UI
 
-Prérequis
----------
-- JDK 17+
-- Docker (optionnel, pour Postgres/PostGIS) ou PostgreSQL + PostGIS installé localement
-- Gradle wrapper (fourni : `./gradlew`)
+## Requirements
 
-Quick start (local)
--------------------
-1. Cloner le dépôt et aller dans le dossier `backend` :
+- JDK 17 or newer for local development
+- PostgreSQL with PostGIS, or Docker for a database container
+- The included Gradle Wrapper (`./gradlew`)
 
-```bash
-git clone <url_du_dépôt>
-cd backend
-```
+The repository-root `compose.yaml` can build and start the database, backend, and frontend together. See the root [README](../../README.md) for the recommended setup.
 
-2. Lancer une base PostgreSQL/PostGIS (ex. via Docker) :
+## Local Development
 
-```bash
-docker run --name pg-postgis -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=waterdb -p 5432:5432 -d postgis/postgis
-```
+1. Start a PostgreSQL/PostGIS database and configure the connection in `src/main/resources/application.properties` or through Spring datasource environment variables.
+2. From this directory, build and run the backend:
 
-3. Configurer la connexion dans `src/main/resources/application.properties` (ou via variables d'environnement) :
+	```bash
+	./gradlew test
+	./gradlew bootRun
+	```
 
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/waterdb
-spring.datasource.username=postgres
-spring.datasource.password=postgres
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect=org.hibernate.spatial.dialect.postgis.PostgisDialect
-```
+	On Windows PowerShell, use `gradlew.bat` instead of `./gradlew`.
 
-4. Construire et lancer l'application :
+The application listens on port `8080` by default.
 
-```bash
-./gradlew clean build -x test
-java -jar build/libs/backend-0.0.1-SNAPSHOT.jar
-```
+## API Documentation
 
-L'application démarre par défaut sur le port 8080.
+Once the backend is running:
 
-Documentation API
------------------
-La documentation OpenAPI est exposée automatiquement (springdoc). Une fois l'application démarrée :
+- Swagger UI: <http://localhost:8080/swagger-ui.html>
+- OpenAPI JSON: <http://localhost:8080/api-docs>
 
-- Swagger UI : http://localhost:8080/swagger-ui.html
-- OpenAPI JSON : http://localhost:8080/v3/api-docs
+Examples of API routes include:
 
-Endpoints (extraits)
---------------------
-- `GET  /api/consumption/zone` — consommation agrégée par zone
-- `POST /api/eaudistribue/zone/query` — requêtes filtrées d'eau distribuée (liste de zones, dates, quantités)
-- `POST /api/eautraite/zone/query` — requêtes filtrées d'eau traitée
-- `GET  /api/canalisations/geojson` — GeoJSON des canalisations
+- `GET /api/consumption/zone` for zone-level consumption
+- `POST /api/eaudistribue/zone/query` for filtered distributed-water queries
+- `POST /api/eautraite/zone/query` for filtered treated-water queries
+- `GET /api/canalisations/geojson` for pipeline GeoJSON
 
-Structure du projet
--------------------
-`com.example.backend`
-- `config` — `SwaggerConfig`, `WebConfig` (CORS, web) 
-- `domain.model` — entités JPA : `Captage`, `Commune`, `EauDistribue`, `EauTraite`, `StationTraitement`, etc.
-- `domain.repository` — repositories et implémentations personnalisées
-- `dto` — objets de transfert (`QueryRequestDTO`, `EauDistribueDTO`, `EauTraiteDTO`, `ComparaisonDTO`, ...)
-- `presentation.controller` — contrôleurs REST (`ConsommationController`, etc.)
-- `handler` — `GlobalExceptionHandler`
+## Source Layout
 
-Développement & Tests
----------------------
-- Lancer les tests : `./gradlew test`
-- Exécuter en mode développement (avec rechargement) : `./gradlew bootRun`
+The main Java package is `com.example.backend`:
 
-Bonnes pratiques
-----------------
-- Utiliser des variables d'environnement ou un `application-{profile}.properties` pour les secrets
-- Vérifier la configuration PostGIS et le dialecte Hibernate
-- Documenter les nouveaux endpoints via les annotations OpenAPI
+- `config` contains web, CORS, and API documentation configuration.
+- `domain.model` contains JPA entities such as `Captage`, `Commune`, `EauDistribue`, and `EauTraite`.
+- `domain.repository` contains data repositories and custom implementations.
+- `dto` contains API request and response types.
+- `presentation.controller` contains REST controllers.
+- `handler` contains global exception handling.
+
+## Configuration Notes
+
+- Keep database credentials and other secrets in environment variables or an untracked local configuration file.
+- Ensure the database has the PostGIS extension available when spatial features are used.
+- Document new endpoints with OpenAPI annotations.
 
 ---

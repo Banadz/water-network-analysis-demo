@@ -8,7 +8,7 @@ export const useChartExport = () => {
     try {
       const element = document.getElementById(chartId);
       if (!element) {
-        throw new Error(`Élément ${chartId} non trouvé`);
+        throw new Error(`Chart element ${chartId} was not found`);
       }
 
       const canvas = await html2canvas(element, {
@@ -25,7 +25,7 @@ export const useChartExport = () => {
       
       return true;
     } catch (error) {
-      console.error('Erreur lors de l\'export:', error);
+      console.error('Chart export error:', error);
       throw error;
     }
   }, []);
@@ -75,13 +75,13 @@ export const useChartExport = () => {
       
       const zipBlob = await zip.generateAsync({ type: 'blob' });
       const link = document.createElement('a');
-      link.download = `graphiques_${new Date().toISOString().split('T')[0]}.zip`;
+      link.download = `charts_${new Date().toISOString().split('T')[0]}.zip`;
       link.href = URL.createObjectURL(zipBlob);
       link.click();
       
       return true;
     } catch (error) {
-      console.error('Erreur lors de l\'export ZIP:', error);
+      console.error('ZIP export error:', error);
       throw error;
     }
   }, []);
@@ -131,7 +131,7 @@ export const useChartExport = () => {
       
       return true;
     } catch (error) {
-      console.error('Erreur lors de l\'export Excel:', error);
+      console.error('Excel export error:', error);
       throw error;
     }
   }, []);
@@ -178,12 +178,12 @@ export const useChartExport = () => {
         XLSX.utils.book_append_sheet(wb, ws, sheetName);
       });
       
-      const fileName = `graphiques_${new Date().toISOString().split('T')[0]}.xlsx`;
+      const fileName = `charts_${new Date().toISOString().split('T')[0]}.xlsx`;
       XLSX.writeFile(wb, fileName);
       
       return true;
     } catch (error) {
-      console.error('Erreur lors de l\'export Excel multiple:', error);
+      console.error('Multi-chart Excel export error:', error);
       throw error;
     }
   }, []);

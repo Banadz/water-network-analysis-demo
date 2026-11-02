@@ -60,12 +60,12 @@ export const useGraphData = (graphs, graphElements) => {
 
       for (const graph of visibleGraphs) {
         if (!graph.dateDebut || !graph.dateFin) {
-          console.warn(`⚠️ Le graphe "${graph.name}" n'a pas de dates définies`);
+          console.warn(`Chart "${graph.name}" has no dates`);
           continue;
         }
 
         if (!graph.elements || graph.elements.length === 0) {
-          console.warn(`⚠️ Le graphe "${graph.name}" n'a pas d'éléments`);
+          console.warn(`Chart "${graph.name}" has no elements`);
           continue;
         }
 
@@ -129,7 +129,7 @@ export const useGraphData = (graphs, graphElements) => {
       }
 
       if (allRequests.length === 0) {
-        setError("Aucun graphe visible avec des dates définies et des éléments actifs");
+        setError("No visible chart has a date range and active elements");
         setLoading(false);
         return;
       }
@@ -161,7 +161,7 @@ export const useGraphData = (graphs, graphElements) => {
             type: request.type,
             enablePrediction: request.enablePrediction,
             success: false,
-            error: result.reason?.message || 'Erreur inconnue'
+            error: result.reason?.message || 'Unknown error'
           };
         }
       });
@@ -208,12 +208,12 @@ export const useGraphData = (graphs, graphElements) => {
 
       const hasErrors = processedData.some(item => !item.success);
       if (hasErrors) {
-        setError("Certaines requêtes ont échoué. Consultez la console.");
+        setError("Some requests failed. Check the console for details.");
       }
 
     } catch (err) {
       console.error('❌ Erreur:', err);
-      setError(err.message || 'Une erreur est survenue');
+      setError(err.message || 'An error occurred');
     } finally {
       setLoading(false);
     }

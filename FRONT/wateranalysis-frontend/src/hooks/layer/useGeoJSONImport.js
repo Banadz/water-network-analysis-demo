@@ -8,11 +8,11 @@ export const useGeoJSONImport = () => {
   // GeoJSON file validation 
   const validateGeoJSON = (data) => {
     if (!data || typeof data !== 'object') {
-      throw new Error('Format de fichier invalide');
+      throw new Error('Invalid file format');
     }
 
     if (data.type !== 'FeatureCollection' && data.type !== 'Feature') {
-      throw new Error('Le fichier doit être un GeoJSON valide (FeatureCollection ou Feature)');
+      throw new Error('The file must be a valid GeoJSON FeatureCollection or Feature');
     }
 
     return true;
@@ -124,7 +124,7 @@ export const useGeoJSONImport = () => {
     try {
       // Verify file type
       if (!file.name.endsWith('.geojson') && !file.name.endsWith('.json')) {
-        throw new Error('Le fichier doit être au format .geojson ou .json');
+        throw new Error('The file must use the .geojson or .json format');
       }
 
       // read file content

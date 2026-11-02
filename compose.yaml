@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-wateranalysis}
+      POSTGRES_USER: ${POSTGRES_USER:-wateranalysis}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wateranalysis_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./BACK/wateranalysis-backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-wateranalysis}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-wateranalysis}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-wateranalysis_dev}
+      PYTHON_API_URL: ${PYTHON_API_URL:-http://host.docker.internal:8000}
+      SERVER_PORT: 8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+
+  frontend:
+    build:
+      context: ./FRONT/wateranalysis-frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost:8080/api}
+        REACT_APP_ENV: ${REACT_APP_ENV:-development}
+        REACT_APP_MAPBOX_TOKEN: ${REACT_APP_MAPBOX_TOKEN:-}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+
+volumes:
+  postgres_data:

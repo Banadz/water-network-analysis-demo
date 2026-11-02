@@ -57,16 +57,16 @@ const MainContent = ({
 
     const isHeatmapActive = activeLayers.some(layer => layer.layerKey === LAYER_TYPES.HEATMAP);
 
-    // Composants pour différentes vues
+    // Components for the available views
     const DashboardView = () => (
         <div className="p-6 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Tableau de bord</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                    { label: "Consommation totale", value: "1,234,567 L", icon: Activity, color: "blue" },
-                    { label: "Zones actives", value: "156", icon: Users, color: "green" },
-                    { label: "Alertes", value: "12", icon: Calendar, color: "red" },
-                    { label: "Tendance", value: "+12.5%", icon: TrendingUp, color: "purple" }
+                    { label: "Total consumption", value: "1,234,567 L", icon: Activity, color: "blue" },
+                    { label: "Active zones", value: "156", icon: Users, color: "green" },
+                    { label: "Alerts", value: "12", icon: Calendar, color: "red" },
+                    { label: "Trend", value: "+12.5%", icon: TrendingUp, color: "purple" }
                 ].map((stat, idx) => (
                     <div key={idx} className="bg-white p-6 rounded-lg shadow border border-gray-200">
                         <div className="flex items-center justify-between">
@@ -82,13 +82,13 @@ const MainContent = ({
                 ))}
             </div>
             <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <h3 className="text-lg font-semibold mb-4">Activité récente</h3>
+                <h3 className="text-lg font-semibold mb-4">Recent activity</h3>
                 <div className="space-y-3">
-                    {["Nouvelle zone ajoutée", "Rapport généré", "Mise à jour de couche"].map((activity, idx) => (
+                    {["New zone added", "Report generated", "Layer updated"].map((activity, idx) => (
                         <div key={idx} className="flex items-center space-x-3 p-3 bg-gray-50 rounded">
                             <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                             <span className="text-gray-700">{activity}</span>
-                            <span className="text-sm text-gray-400 ml-auto">Il y a {idx + 1}h</span>
+                            <span className="text-sm text-gray-400 ml-auto">{idx + 1}h ago</span>
                         </div>
                     ))}
                 </div>
@@ -98,23 +98,23 @@ const MainContent = ({
 
     const OverviewView = () => (
         <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Vue d'ensemble</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Overview</h2>
             <div className="bg-white p-8 rounded-lg shadow border border-gray-200">
                 <div className="text-center max-w-2xl mx-auto space-y-4">
                     <Activity className="w-16 h-16 mx-auto text-blue-500" />
-                    <h3 className="text-xl font-semibold">Réseau d'eau intelligent</h3>
+                    <h3 className="text-xl font-semibold">Smart water network</h3>
                     <p className="text-gray-600">
-                        Plateforme de gestion et d'analyse du réseau d'approvisionnement en eau.
-                        Suivez la consommation, analysez les tendances et optimisez la distribution.
+                        A platform for managing and analysing water supply networks.
+                        Track consumption, analyse trends, and optimise distribution.
                     </p>
                     <div className="grid grid-cols-3 gap-4 mt-6">
                         <div className="p-4 bg-blue-50 rounded">
                             <p className="text-3xl font-bold text-blue-600">24/7</p>
-                            <p className="text-sm text-gray-600">Surveillance</p>
+                            <p className="text-sm text-gray-600">Monitoring</p>
                         </div>
                         <div className="p-4 bg-green-50 rounded">
                             <p className="text-3xl font-bold text-green-600">98%</p>
-                            <p className="text-sm text-gray-600">Précision</p>
+                            <p className="text-sm text-gray-600">Accuracy</p>
                         </div>
                         <div className="p-4 bg-purple-50 rounded">
                             <p className="text-3xl font-bold text-purple-600">150+</p>
@@ -128,12 +128,12 @@ const MainContent = ({
 
     const NewsView = () => (
         <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Actualités</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">News</h2>
             <div className="space-y-4">
                 {[
-                    { title: "Nouvelle fonctionnalité : Prévisions IA", date: "09 Déc 2025", category: "Mise à jour" },
-                    { title: "Maintenance planifiée du système", date: "08 Déc 2025", category: "Info" },
-                    { title: "Rapport mensuel disponible", date: "07 Déc 2025", category: "Rapport" }
+                    { title: "New feature: AI forecasting", date: "Dec 09, 2025", category: "Update" },
+                    { title: "Scheduled system maintenance", date: "Dec 08, 2025", category: "Notice" },
+                    { title: "Monthly report available", date: "Dec 07, 2025", category: "Report" }
                 ].map((news, idx) => (
                     <div key={idx} className="bg-white p-6 rounded-lg shadow border border-gray-200 hover:shadow-lg transition-shadow">
                         <div className="flex items-start justify-between">
@@ -152,13 +152,13 @@ const MainContent = ({
 
     const ReportsView = () => (
         <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Rapports</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Reports</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                    { title: "Rapport mensuel", type: "PDF", size: "2.4 MB" },
-                    { title: "Analyse trimestrielle", type: "Excel", size: "1.8 MB" },
-                    { title: "Statistiques annuelles", type: "PDF", size: "3.1 MB" },
-                    { title: "Données brutes", type: "CSV", size: "5.2 MB" }
+                    { title: "Monthly report", type: "PDF", size: "2.4 MB" },
+                    { title: "Quarterly analysis", type: "Excel", size: "1.8 MB" },
+                    { title: "Annual statistics", type: "PDF", size: "3.1 MB" },
+                    { title: "Raw data", type: "CSV", size: "5.2 MB" }
                 ].map((report, idx) => (
                     <div key={idx} className="bg-white p-6 rounded-lg shadow border border-gray-200 hover:shadow-lg transition-shadow">
                         <div className="flex items-center justify-between">
@@ -178,12 +178,12 @@ const MainContent = ({
 
     const TrendsView = () => (
         <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Tendances</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Trends</h2>
             <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
                 <div className="flex items-center justify-center h-64">
                     <div className="text-center">
                         <BarChart2 className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                        <p className="text-gray-500">Graphiques de tendances à venir</p>
+                        <p className="text-gray-500">Trend charts coming soon</p>
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@ const MainContent = ({
 
     const StatsView = () => (
         <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Statistiques</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Statistics</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
                     <div className="flex items-center justify-center h-48">
@@ -214,7 +214,7 @@ const MainContent = ({
             <div className="bg-white p-12 rounded-lg shadow border border-gray-200">
                 <div className="text-center text-gray-500">
                     <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                    <p>Contenu à venir pour : {title}</p>
+                    <p>Content coming soon for: {title}</p>
                 </div>
             </div>
         </div>
@@ -238,11 +238,11 @@ const MainContent = ({
             case 'forecasts':
                 return <StatsView />;
             case 'layer-management':
-                return <GenericView title="Gestion des couches" />;
+                return <GenericView title="Layer management" />;
             case 'import-export':
                 return <GenericView title="Import/Export" />;
             case 'comparisons':
-                return <GenericView title="Comparaisons" />;
+                return <GenericView title="Comparisons" />;
             case 'map':
             default:
                 return (
@@ -271,13 +271,13 @@ const MainContent = ({
                             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-white px-4 py-2 rounded-lg shadow-lg border">
                                 <div className="flex items-center space-x-2">
                                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
-                                    <span className="text-sm text-gray-600">Chargement heatmap...</span>
+                                    <span className="text-sm text-gray-600">Loading heatmap...</span>
                                 </div>
                             </div>
                         )}
                         {heatmapInfo.error && (
                             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-red-50 px-4 py-2 rounded-lg shadow-lg border border-red-200">
-                                <span className="text-sm text-red-600">Erreur: {heatmapInfo.error}</span>
+                                <span className="text-sm text-red-600">Error: {heatmapInfo.error}</span>
                             </div>
                         )}
                     </>

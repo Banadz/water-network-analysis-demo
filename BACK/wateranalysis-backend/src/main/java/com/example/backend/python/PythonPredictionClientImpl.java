@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +22,8 @@ public class PythonPredictionClientImpl implements PythonPredictionClient {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
-    private final String pythonApiUrl = "http://localhost:8000/api";
+    @Value("${python.api.url:http://localhost:8000}")
+    private String pythonApiUrl;
 
     @Override
     public List<PythonPredictionResponseDTO> predict(String type, PythonPredictionRequestDTO request) {
@@ -32,7 +34,7 @@ public class PythonPredictionClientImpl implements PythonPredictionClient {
         } catch (JsonProcessingException e) {
             System.out.println("Could not log request: " + e.getMessage());
         }
-        String endpoint = pythonApiUrl + "/predict/zones/" + type;
+        String endpoint = pythonApiUrl + "/api/predict/zones/" + type;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

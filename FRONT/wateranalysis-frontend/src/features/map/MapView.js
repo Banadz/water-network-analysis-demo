@@ -318,7 +318,7 @@ const MapView = forwardRef(({ activeLayers, onFeatureClick, onZoneClick, onZoneD
           borderRadius: 4,
           border: '1px solid #ddd'
         }}>
-          📊 Chargement des données heatmap...
+          📊 Loading heatmap data...
           {heatmapDateRange && (
             <div style={{fontSize: '10px', marginTop: '4px'}}>
               {new Date(heatmapDateRange.startDate).toLocaleDateString()} - {new Date(heatmapDateRange.endDate).toLocaleDateString()}
@@ -340,7 +340,7 @@ const MapView = forwardRef(({ activeLayers, onFeatureClick, onZoneClick, onZoneD
           border: '1px solid #ffccc7',
           color: '#ff4d4f'
         }}>
-          Erreur: {error}
+          Error: {error}
         </div>
       )}
 

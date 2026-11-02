@@ -34,7 +34,7 @@ const GeoJSONImportSection = ({
   const formatDate = (isoString) => {
     try {
       const date = new Date(isoString);
-      return date.toLocaleDateString('fr-FR', {
+      return date.toLocaleDateString('en-GB', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
@@ -42,7 +42,7 @@ const GeoJSONImportSection = ({
         minute: '2-digit'
       });
     } catch {
-      return 'Date inconnue';
+      return 'Unknown date';
     }
   };
 
@@ -50,16 +50,16 @@ const GeoJSONImportSection = ({
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h3 className="text-xs font-medium text-gray-700 uppercase tracking-wider">
-          Couches importées
+          Imported layers
         </h3>
         {importedLayers.length > 0 && (
           <button
             onClick={onClearAll}
             className="text-xs text-red-600 hover:text-red-700 flex items-center space-x-1"
-            title="Supprimer toutes les couches importées"
+            title="Remove all imported layers"
           >
             <Trash2 className="w-3 h-3" />
-            <span>Tout effacer</span>
+            <span>Clear all</span>
           </button>
         )}
       </div>
@@ -78,12 +78,12 @@ const GeoJSONImportSection = ({
           {importing ? (
             <>
               <div className="animate-spin h-3 w-3 border-2 border-blue-600 border-t-transparent rounded-full"></div>
-              <span className="font-medium">Import en cours...</span>
+              <span className="font-medium">Importing...</span>
             </>
           ) : (
             <>
               <Upload className="w-3 h-3" />
-              <span className="font-medium">Importer GeoJSON</span>
+              <span className="font-medium">Import GeoJSON</span>
             </>
           )}
         </div>
@@ -101,7 +101,7 @@ const GeoJSONImportSection = ({
       {/* error logs */}
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-xs">
-          <p className="font-semibold">Erreur d'import:</p>
+          <p className="font-semibold">Import error:</p>
           <p>{error}</p>
         </div>
       )}
@@ -126,7 +126,7 @@ const GeoJSONImportSection = ({
                       {layer.geometryType && (
                         <>
                           <span>•</span>
-                          <span className="font-medium" title="Type de géométrie">
+                          <span className="font-medium" title="Geometry type">
                             {layer.geometryType}
                           </span>
                         </>
@@ -138,7 +138,7 @@ const GeoJSONImportSection = ({
                 <button
                   onClick={() => onRemoveLayer(layer.id)}
                   className="text-red-500 hover:text-red-700 p-0.5 flex-shrink-0"
-                  title="Supprimer cette couche"
+                  title="Remove this layer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -154,7 +154,7 @@ const GeoJSONImportSection = ({
                         ? 'bg-green-100 text-green-700' 
                         : 'bg-gray-100 text-gray-500'
                     }`}
-                    title={layer.active ? 'Masquer' : 'Afficher'}
+                    title={layer.active ? 'Hide' : 'Show'}
                   >
                     {layer.active ? (
                       <Eye className="w-3 h-3" />
@@ -170,7 +170,7 @@ const GeoJSONImportSection = ({
                       onChange={(e) => onToggleSelected(layer.id, e.target.checked)}
                       className="w-3 h-3 rounded"
                     />
-                    <span className="text-[10px] text-gray-600">Sélectionner</span>
+                    <span className="text-[10px] text-gray-600">Select</span>
                   </label>
                 </div>
 
@@ -185,7 +185,7 @@ const GeoJSONImportSection = ({
 
       {importedLayers.length === 0 && !error && (
         <div className="text-center py-3 text-gray-500 text-xs italic">
-          Aucune couche importée
+          No imported layers
         </div>
       )}
     </div>

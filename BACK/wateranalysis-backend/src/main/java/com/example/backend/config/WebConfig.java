@@ -10,8 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins(
-                    "http://localhost:3000", // front react
+                .allowedOriginPatterns(
+                    "http://localhost:*", // local React development and Docker ports
+                    "http://127.0.0.1:*",
                     "http://localhost:8080",  // Swagger UI (même origine)
                     "http://127.0.0.1:8080",  // Swagger UI (alternative)
                     "http://localhost:8081",

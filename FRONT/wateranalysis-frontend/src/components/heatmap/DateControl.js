@@ -27,10 +27,10 @@ const DateControl = ({ onDateRangeChange, defaultRange }) => {
       boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
       minWidth: '250px'
     }}>
-      <h4 style={{ margin: '0 0 12px 0', fontSize: '14px' }}>📅 Période du Heatmap</h4>      
+      <h4 style={{ margin: '0 0 12px 0', fontSize: '14px' }}>📅 Heatmap period</h4>
       <div style={{ marginBottom: '8px' }}>
         <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px' }}>
-          Date de début:
+          Start date:
         </label>
         <input
           type="date"
@@ -42,7 +42,7 @@ const DateControl = ({ onDateRangeChange, defaultRange }) => {
       
       <div style={{ marginBottom: '12px' }}>
         <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px' }}>
-          Date de fin:
+          End date:
         </label>
         <input
           type="date"
@@ -64,7 +64,7 @@ const DateControl = ({ onDateRangeChange, defaultRange }) => {
           cursor: 'pointer'
         }}
       >
-        ↺ 5 dernières années
+        ↺ Last 5 years
       </button>
     </div>
   );

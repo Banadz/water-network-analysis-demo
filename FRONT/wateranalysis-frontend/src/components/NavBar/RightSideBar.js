@@ -176,16 +176,16 @@ const RightSidebar = ({
         const graph = graphsWithData[0];
         const fileName = `${graph.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}`;
         await exportSingleChart(`chart-${graph.id}`, fileName);
-        setExportSuccess(`Graphique "${graph.name}" exporté en PNG`);
+        setExportSuccess(`Chart "${graph.name}" exported as PNG`);
       } else {
         await exportChartsAsZip(graphsWithData);
-        setExportSuccess(`${graphsWithData.length} graphiques exportés en PNG (ZIP)`);
+        setExportSuccess(`${graphsWithData.length} charts exported as PNG (ZIP)`);
       }
       
       setTimeout(() => setExportSuccess(null), 3000);
     } catch (error) {
-      console.error('Erreur d\'export PNG:', error);
-      alert('Erreur lors de l\'export PNG');
+      console.error('PNG export error:', error);
+      alert('PNG export failed');
     } finally {
       setExporting(false);
     }
@@ -204,7 +204,7 @@ const RightSidebar = ({
         const { chartData } = prepareChartData(graph);
         
         await exportChartDataToExcel(graph, chartData, graphType);
-        setExportSuccess(`Données du graphique "${graph.name}" exportées en Excel`);
+        setExportSuccess(`Chart data for "${graph.name}" exported to Excel`);
       } else {
         // prepare all Data
         const allChartData = graphsWithData.map(graph => {
@@ -212,13 +212,13 @@ const RightSidebar = ({
         });
         
         await exportAllChartsToExcel(graphsWithData, allChartData);
-        setExportSuccess(`${graphsWithData.length} graphiques exportés en Excel`);
+        setExportSuccess(`${graphsWithData.length} charts exported to Excel`);
       }
       
       setTimeout(() => setExportSuccess(null), 3000);
     } catch (error) {
-      console.error('Erreur d\'export Excel:', error);
-      alert('Erreur lors de l\'export Excel');
+      console.error('Excel export error:', error);
+      alert('Excel export failed');
     } finally {
       setExporting(false);
     }
@@ -239,7 +239,7 @@ const RightSidebar = ({
           >
             {isOpen ? <ChevronRight className="w-3 h-3" /> : <ChevronLeft className="w-3 h-3" />}
           </button>
-          {isOpen && <h2 className="text-md font-semibold text-gray-800">Statistiques</h2>}
+          {isOpen && <h2 className="text-md font-semibold text-gray-800">Statistics</h2>}
         </div>
 
         {isOpen && (
@@ -373,9 +373,9 @@ const RightSidebar = ({
                   ) : (
                     <div className="h-20 bg-gradient-to-r from-gray-100 to-gray-200 rounded flex items-center justify-center mb-2">
                       <div className="text-center text-gray-500">
-                        <div className="text-xs">{elementsInGraph.length} élément(s)</div>
+                        <div className="text-xs">{elementsInGraph.length} element(s)</div>
                         <div className="text-[10px] mt-0.5">
-                          {hasData ? 'Pas de données' : 'En attente'}
+                          {hasData ? 'No data' : 'Waiting for data'}
                         </div>
                       </div>
                     </div>
@@ -396,7 +396,7 @@ const RightSidebar = ({
                     <div className="flex justify-between items-center">
                       <span className="text-red-600 flex items-center">
                         <TrendingDown className="w-3 h-3 mr-1" />
-                        Consommation
+                        Consumption
                       </span>
                       <span className="font-medium">
                         {elementsInGraph.filter(e => 
@@ -408,7 +408,7 @@ const RightSidebar = ({
 
                   {hasData && (
                     <div className="mt-2 bg-green-50 border border-green-200 text-green-700 px-2 py-1 rounded text-[10px] text-center">
-                      ✓ Données chargées ({chartData.length} points)
+                      ✓ Data loaded ({chartData.length} points)
                     </div>
                   )}
                 </div>
@@ -417,7 +417,7 @@ const RightSidebar = ({
 
             {visibleGraphs.length === 0 && (
               <div className="text-gray-500 text-sm">
-                Aucun graphique à afficher. Activez un graphique dans le panneau de gauche.
+                No charts to display. Enable a chart in the left panel.
               </div>
             )}
 
@@ -443,7 +443,7 @@ const RightSidebar = ({
                       <>
                         <FileDown className="w-3 h-3" />
                         <span className="font-medium">
-                          Exporter {graphsWithData.length > 1 ? `(${graphsWithData.length})` : ''}
+                          Export {graphsWithData.length > 1 ? `(${graphsWithData.length})` : ''}
                         </span>
                       </>
                     )}
@@ -458,14 +458,14 @@ const RightSidebar = ({
                       className="w-full px-3 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-xs border-b border-gray-100"
                     >
                       <Image className="w-4 h-4 text-blue-600" />
-                      <span>Exporter en PNG</span>
+                      <span>Export as PNG</span>
                     </button>
                     <button
                       onClick={handleExportExcel}
                       className="w-full px-3 py-2 text-left hover:bg-gray-100 flex items-center space-x-2 text-xs"
                     >
                       <FileSpreadsheet className="w-4 h-4 text-green-600" />
-                      <span>Exporter en Excel</span>
+                      <span>Export to Excel</span>
                     </button>
                   </div>
                 )}
