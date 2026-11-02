@@ -1,0 +1,13 @@
+.leaflet-d3-overlay {
+  z-index: 400;
+  pointer-events: none;
+}
+
+.leaflet-d3-overlay path {
+  pointer-events: visiblePainted;
+  transition: opacity 0.2s;
+}
+
+.leaflet-zoom-hide {
+  pointer-events: none;
+}

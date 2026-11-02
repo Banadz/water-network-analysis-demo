@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "reservoir",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Nom_Local": "Ampahidranovato", "Id_Local": 0, "Nom_Reseau": "AEP_Antamiana", "Annee_cons": 2008, "Annee_Reha": 2011, "Id_Reseau": "R1", "Id_Reservo": "R1_Rs1", "X": 485703.904, "Y": 519307.372, "Z_m": 1114, "Nb_Meg_Ben": 451, "Nb_Hab_Ben": 3244, "Lg_line_m": 15911.0, "Nature": "Moellon", "Ferme": "Oui", "Capacite_m": 60.0, "Barriere": "Oui", "Etat_Gal": "Fonctionnel", "Defauts": "Fuites", "Situat_Rsr": "existant", "Date_Enque": "08/11/2011" }, "geometry": { "type": "Point", "coordinates": [ 47.264268416249401, -21.43583395310214 ] } }
+]
+}

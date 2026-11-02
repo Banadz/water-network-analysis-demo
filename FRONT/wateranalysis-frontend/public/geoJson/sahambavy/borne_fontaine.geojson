@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "borne_fontaine",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Nom_Local": "Antamiana Centre", "Id_Bf": "PEP01", "X": 484397.896, "Y": 518991.581, "Z_m": 1097, "Nb_Meg": "48", "Nb_Hab": 192, "Etat_Gal": "Fonctionnelle", "Defauts": null, "Situati_BF": "existant", "Id_APD": "BF4_Acc", "Id_Reseau": "R1", "Id BP": "B182" }, "geometry": { "type": "Point", "coordinates": [ 47.251648976555231, -21.438818451539174 ] } },
+{ "type": "Feature", "properties": { "Nom_Local": "Antamiana Centre", "Id_Bf": "PEP02", "X": 484362.666, "Y": 518865.686, "Z_m": 1084, "Nb_Meg": "52", "Nb_Hab": 260, "Etat_Gal": "Fonctionnelle", "Defauts": "Extérieur", "Situati_BF": "existant", "Id_APD": "BF6_Acc", "Id_Reseau": "R1", "Id BP": "B183" }, "geometry": { "type": "Point", "coordinates": [ 47.251399449312153, -21.440000716234287 ] } },
+{ "type": "Feature", "properties": { "Nom_Local": "Antamiana II", "Id_Bf": "PEP03", "X": 484264.395, "Y": 518795.486, "Z_m": 1089, "Nb_Meg": "24", "Nb_Hab": 175, "Etat_Gal": "Fonctionnelle", "Defauts": "Extérieur", "Situati_BF": "existant", "Id_APD": "BF8_Acc", "Id_Reseau": "R1", "Id BP": "B184" }, "geometry": { "type": "Point", "coordinates": [ 47.250431405756757, -21.440564754462699 ] } },
+{ "type": "Feature", "properties": { "Nom_Local": "Sahambavy Gare", "Id_Bf": "PEP04", "X": 485148.181, "Y": 518246.369, "Z_m": 1080, "Nb_Meg": "13", "Nb_Hab": 70, "Etat_Gal": "Fonctionnelle", "Defauts": null, "Situati_BF": "existant", "Id_APD": "BF13_Gl", "Id_Reseau": "R1", "Id BP": null }, "geometry": { "type": "Point", "coordinates": [ 47.258927473112294, -21.445478508983864 ] } }
+]
+}

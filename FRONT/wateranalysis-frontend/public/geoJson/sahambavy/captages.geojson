@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "captages",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Nom_Local": "Andohasakalava", "Id_Local": 0, "Nom_Réseau": "AEP_Antamiana Centre", "Id_Reseau": "R1", "Nom_Source": "Andranokitsikitsika", "Id_Source": "S21", "Id_Captage": "R1_C1", "X": 490840.286, "Y": 518761.757, "Z_m": 1245, "Tech_Capta": "Boite de captage", "Ferme": "Oui", "Q_l_s": 1.33, "Source_Inf": "Mesuré", "Qt_Etiage_": 0, "Etat_Gal": "Fonctionnel", "Defauts": "Clôture", "Date_Enque": "08/11/2011" }, "geometry": { "type": "Point", "coordinates": [ 47.313834684117069, -21.440401199362295 ] } }
+]
+}

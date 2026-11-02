@@ -1,0 +1,187 @@
+/* ─── Root container ─────────────────────────────────────────── */
+.export-root {
+  position: absolute;
+  bottom: 16px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ─── Trigger button ─────────────────────────────────────────── */
+.export-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 13px;
+  height: 36px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 7px;
+  cursor: pointer;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.export-btn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    0 6px 18px rgba(0, 0, 0, 0.09);
+}
+
+.export-btn--open {
+  background: #f3f4f6;
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+.export-btn--pressed {
+  transform: scale(0.97);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.export-btn--capturing,
+.export-btn:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.export-btn__icon {
+  display: flex;
+  align-items: center;
+  color: #185FA5;
+}
+
+.export-btn__label {
+  line-height: 1;
+}
+
+.export-btn__chevron {
+  display: flex;
+  align-items: center;
+  margin-left: 1px;
+}
+
+/* ─── Loading spinner ────────────────────────────────────────── */
+.export-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(24, 95, 165, 0.25);
+  border-top-color: #185FA5;
+  border-radius: 50%;
+  animation: export-spin 0.7s linear infinite;
+}
+
+@keyframes export-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Dropdown menu ──────────────────────────────────────────── */
+.export-menu {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  transform-origin: bottom right;
+  transition:
+    opacity 0.2s cubic-bezier(.4, 0, .2, 1),
+    transform 0.2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.export-menu--open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.export-menu-inner {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 200px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Menu items ─────────────────────────────────────────────── */
+.export-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s ease;
+}
+
+.export-item--hovered {
+  background: #eff6ff;
+}
+
+.export-item--disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.export-item__icon {
+  display: flex;
+  align-items: center;
+  color: #185FA5;
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity 0.12s;
+}
+
+.export-item--hovered .export-item__icon {
+  opacity: 1;
+}
+
+.export-item__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.export-item__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1;
+}
+
+.export-item__hint {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+.export-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 0 12px;
+}

@@ -1,0 +1,95 @@
+name: Deploy Backend & Database with Docker
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: wateranalysis-api
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_HOST }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          port: ${{ secrets.PROD_SERVER_SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          timeout: 300s
+          command_timeout: 15m
+          script: |
+            set -e
+
+            # --- Configuration des variables ---
+            APP_DIR=~/waternetworkwebmapping-api
+            API_CONTAINER="waternetworkwebmapping-api"
+            IMAGE_FULL="${{ env.IMAGE_NAME }}:latest"
+            NETWORK="waternetwork"
+
+            # 1. Gestion du réseau Docker
+            docker network inspect $NETWORK >/dev/null 2>&1 || docker network create $NETWORK
+
+            # 2. Préparation du répertoire et du code
+            if [ ! -d "$APP_DIR/.git" ]; then
+                echo "🚀 Initialisation du projet (clone)..."
+                git clone git@github.com:Banadz/wateranalysis-backend.git $APP_DIR
+            fi
+
+            cd $APP_DIR
+            git fetch origin
+            git reset --hard origin/main
+
+            # --- Correction de l'erreur de dossier 'backend' ---
+            # Si le dossier 'backend' existe, on entre dedans, sinon on reste à la racine
+            if [ -d "backend" ]; then
+                echo "📂 Entrée dans le dossier backend..."
+                cd backend
+            fi
+
+            # 3. Injection des configurations via sed
+            PROPS_FILE="src/main/resources/application.properties"
+
+            if [ ! -f "$PROPS_FILE" ]; then
+                echo "❌ Erreur : $PROPS_FILE introuvable dans $(pwd)"
+                exit 1
+            fi
+
+            echo "🔧 Mise à jour de application.properties..."
+            sed -i "s|spring.datasource.url=.*|spring.datasource.url=${{ secrets.DB_URL }}|g" $PROPS_FILE
+            sed -i "s|spring.datasource.username=.*|spring.datasource.username=${{ secrets.DB_USER }}|g" $PROPS_FILE
+            sed -i "s|spring.datasource.password=.*|spring.datasource.password=${{ secrets.DB_PASSWORD }}|g" $PROPS_FILE
+            sed -i "s|spring.jpa.properties.hibernate.dialect=.*|spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect|g" $PROPS_FILE
+            sed -i "s|spring.jpa.hibernate.ddl-auto=.*|spring.jpa.hibernate.ddl-auto=update|g" $PROPS_FILE
+            sed -i "s|python.api.url=.*|python.api.url=${{ secrets.PYTHON_API_URL }}|g" $PROPS_FILE
+
+            # 4. Build de l'image Docker
+            echo "🛠️ Build de l'image API..."
+            docker build -t ${IMAGE_FULL} .
+
+            # 5. Déploiement de l'API
+            echo "🚀 Redémarrage de l'API..."
+            docker stop $API_CONTAINER 2>/dev/null || true
+            docker rm $API_CONTAINER 2>/dev/null || true
+
+            docker run -d \
+              --name $API_CONTAINER \
+              --restart unless-stopped \
+              -p 4141:8080 \
+              --network $NETWORK \
+              -e SPRING_DATASOURCE_URL="${{ secrets.DB_URL }}" \
+              -e SPRING_DATASOURCE_USERNAME="${{ secrets.DB_USER }}" \
+              -e SPRING_DATASOURCE_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+              ${IMAGE_FULL}
+
+            # 6. Nettoyage
+            docker image prune -f
+
+            echo "✅ Déploiement réussi sur le port 4141 !"

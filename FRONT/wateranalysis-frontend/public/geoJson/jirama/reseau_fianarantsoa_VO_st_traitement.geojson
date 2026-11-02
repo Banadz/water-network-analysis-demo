@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "reseau_fianarantsoa_VO_st_traitement",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "ID": "VATOSOLA", "Elevation": 1348, "Decanteurs": 2, "Filtres": 2, "Capacite": "240", "X": 462003, "Y": 516311 }, "geometry": { "type": "Point", "coordinates": [ 47.035631426600489, -21.463670331675949 ] } },
+{ "type": "Feature", "properties": { "ID": "TOMBANA", "Elevation": 1259, "Decanteurs": 2, "Filtres": 4, "Capacite": "340", "X": 476188, "Y": 510472 }, "geometry": { "type": "Point", "coordinates": [ 47.172791962066214, -21.515836279444617 ] } },
+{ "type": "Feature", "properties": { "ID": "AMBANIMASO", "Elevation": 1172, "Decanteurs": 2, "Filtres": 2, "Capacite": "150", "X": 466048, "Y": 516324 }, "geometry": { "type": "Point", "coordinates": [ 47.074665390546173, -21.463400921810695 ] } }
+]
+}

@@ -1,0 +1,80 @@
+name: Deploy Frontend with Docker
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: wateranalysis-frontend
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_HOST }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          port: ${{ secrets.PROD_SERVER_SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          timeout: 300s
+          command_timeout: 15m
+          script: |
+            set -e
+
+            # Configuration
+            ENV=production
+            APP_DIR=~/waternetworkwebmapping
+            CONTAINER_NAME=waternetworkwebmapping
+            IMAGE_TAG=latest
+            HOST_PORT=4040
+            IMAGE_NAME="${{ env.IMAGE_NAME }}"
+            IMAGE_FULL="${IMAGE_NAME}:${IMAGE_TAG}"
+
+            # 1. Préparation du répertoire
+            if [ ! -d "$APP_DIR/.git" ]; then
+                echo "Initialisation du projet..."
+                git clone git@github.com:Banadz/wateranalysis-frontend.git $APP_DIR
+            fi
+
+            cd $APP_DIR
+            git fetch origin
+            git reset --hard origin/main # Ou votre branche de prod
+
+            # 2. Gestion du réseau (Correction de l'erreur "already exists")
+            docker network inspect waternetwork >/dev/null 2>&1 || \
+            docker network create waternetwork
+
+            # 3. Build de l'image
+            # Note : On vérifie si le Dockerfile existe avant de lancer
+            if [ ! -f "Dockerfile" ]; then
+                echo "❌ Erreur : Dockerfile introuvable dans $(pwd)"
+                exit 1
+            fi
+
+            docker build \
+              --build-arg REACT_APP_API_URL='${{ secrets.REACT_APP_API_URL_PROD }}' \
+              --build-arg REACT_APP_MAPBOX_TOKEN='${{ secrets.REACT_APP_MAPBOX_TOKEN }}' \
+              -t ${IMAGE_FULL} .
+
+            # 4. Déploiement (Stop & Run)
+            docker stop ${CONTAINER_NAME} 2>/dev/null || true
+            docker rm ${CONTAINER_NAME} 2>/dev/null || true
+
+            docker run -d \
+              --name ${CONTAINER_NAME} \
+              --restart unless-stopped \
+              -p ${HOST_PORT}:80 \
+              --network waternetwork \
+              ${IMAGE_FULL}
+
+            # 5. Nettoyage
+            docker image prune -f
+
+            echo "✅ Déploiement PROD terminé sur le port ${HOST_PORT}"

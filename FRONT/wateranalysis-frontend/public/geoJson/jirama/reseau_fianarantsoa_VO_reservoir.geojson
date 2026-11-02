@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "reseau_fianarantsoa_VO_reservoir",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "ID": "AMPANENJANANA", "Capacite": "500 m3", "Type": "Cylindrique", "Cote_radie": 1192, "Diametre": 13.24, "Longueur": null, "Largueur": null, "Hauteur": 3.8, "Trop_plein": 3.59, "X": 467678, "Y": 516254 }, "geometry": { "type": "Point", "coordinates": [ 47.090420100007911, -21.464161530651609 ] } },
+{ "type": "Feature", "properties": { "ID": "ROVA", "Capacite": "150 m3", "Type": "Rectangulaire", "Cote_radie": 1258, "Diametre": null, "Longueur": 10.19, "Largueur": 5.47, "Hauteur": 3.0, "Trop_plein": 2.8, "X": 466308, "Y": 516619 }, "geometry": { "type": "Point", "coordinates": [ 47.077126391278597, -21.461110115594877 ] } },
+{ "type": "Feature", "properties": { "ID": "MORTHOMME", "Capacite": "500 m3", "Type": "Rectangulaire - 2 compartiments", "Cote_radie": 1211, "Diametre": null, "Longueur": 11.0, "Largueur": 6.0, "Hauteur": 4.0, "Trop_plein": 3.84, "X": 466441, "Y": 517311 }, "geometry": { "type": "Point", "coordinates": [ 47.078436179843067, -21.454067241593684 ] } },
+{ "type": "Feature", "properties": { "ID": "ILAINDASTRA", "Capacite": "500 m3", "Type": "Rectangulaire - 2 compartiments", "Cote_radie": 1164, "Diametre": null, "Longueur": 11.0, "Largueur": 6.86, "Hauteur": 4.0, "Trop_plein": 3.52, "X": 466789, "Y": 518655 }, "geometry": { "type": "Point", "coordinates": [ 47.081591025704988, -21.442316303561352 ] } },
+{ "type": "Feature", "properties": { "ID": "MAHAMANINA", "Capacite": "500 m3", "Type": "Cylindrique", "Cote_radie": 1151, "Diametre": 13.25, "Longueur": null, "Largueur": null, "Hauteur": 3.8, "Trop_plein": 3.84, "X": 468126, "Y": 519550 }, "geometry": { "type": "Point", "coordinates": [ 47.094385062334474, -21.434702399484642 ] } },
+{ "type": "Feature", "properties": { "ID": "CHU TAMBOHOBE", "Capacite": null, "Type": "SURELEVE", "Cote_radie": null, "Diametre": null, "Longueur": null, "Largueur": null, "Hauteur": null, "Trop_plein": null, "X": null, "Y": null }, "geometry": { "type": "Point", "coordinates": [ 47.083858441065544, -21.44393404686852 ] } }
+]
+}
