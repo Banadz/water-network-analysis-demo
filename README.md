@@ -9,6 +9,10 @@ Water Network Analysis is a web platform for mapping and analysing drinking-wate
 - Request and visualise production, consumption, and heatmap data through the API.
 - Build charts for selected zones and export chart data.
 
+## Demo Video
+
+Video link: `https://drive.google.com/file/d/1MYhkEYFRbh_aQR5WkX7ACcNOz5s-Ud_W/view?usp=drive_link`
+
 ## Requirements
 
 For the recommended container-based setup:
