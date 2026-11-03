@@ -11,7 +11,7 @@ Water Network Analysis is a web platform for mapping and analysing drinking-wate
 
 ## Demo Video
 
-Video link: `https://drive.google.com/file/d/1MYhkEYFRbh_aQR5WkX7ACcNOz5s-Ud_W/view?usp=drive_link`
+Video link: `https://zenodo.org/records/23914670`
 
 ## Requirements
 
